@@ -40,7 +40,7 @@ sections:
       Asegúrese de que tiene al menos una licencia de Azure AD Premium de tipo P1 o P2 y un conector de Azure AD Application Proxy instalada. Después de instalar correctamente el primer conector, el servicio de Azure AD Application Proxy se habilitará automáticamente.
   - question: >
       Configuración del conector
-    answer: ''
+    answer: ' '
   - question: >
       ¿Por qué mi conector todavía usa una versión antigua y no se ha actualizado automáticamente a la versión más reciente?
     answer: "Esto puede deberse a que el servicio del actualizador no funciona correctamente o a que no hay nuevas actualizaciones disponibles que el servicio pueda instalar.\n\nEl servicio de actualización es correcto si se está ejecutando y no hay ningún error registrado en el registro de eventos (Registros de aplicaciones y servicios -> Microsoft -> AadApplicationProxy -> Updater -> Administrador). \n\n> [!IMPORTANT]\n> Solo se publican las versiones principales para la actualización automática. Se recomienda actualizar el conector manualmente solo si es necesario. Por ejemplo, no puede esperar a una versión principal, porque debe corregir un problema conocido o usar una característica nueva. Para obtener más información sobre las nuevas versiones, el tipo de versión (descarga, actualización automática), correcciones de errores y nuevas características, consulte [Azure AD Application Proxy: Historial de lanzamiento de versiones](./application-proxy-release-version-history.md).\n\nPara actualizar manualmente un conector:\n\n- Descargue la versión más reciente del conector. Lo encontrará en Application Proxy en Azure Portal. También lo puede encontrar en [Azure AD Application Proxy: Historial de lanzamiento de versiones](./application-proxy-release-version-history.md).\n-   El instalador reinicia los servicios del conector del Azure AD Application Proxy. En algunos casos, es posible que sea necesario reiniciar el servidor si el instalador no puede reemplazar todos los archivos. Por lo tanto, se recomienda cerrar todas las aplicaciones (es decir, el Visor de eventos) antes de iniciar la actualización.\n-   Ejecute al programa de instalación. El proceso de actualización es rápido y no requiere proporcionar ninguna credencial. El conector no se volverá a registrar.\n"
@@ -88,7 +88,7 @@ sections:
     answer: "El proxy de aplicación requiere Windows Server 2012 R2 o versiones posteriores. Actualmente hay una limitación en HTTP2 para Windows Server 2019. Para usar correctamente el conector en Windows Server 2019, deberá agregar la siguiente clave del Registro y reiniciar el servidor:\n\n```\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\WinHttp\\EnableDefaultHttp2 (DWORD) Value: 0 \n```\n"
   - question: >
       Configuración de aplicaciones
-    answer: ''
+    answer: ' '
   - question: >
       Recibo un error sobre un certificado no válido o una contraseña posiblemente incorrecta
     answer: >
@@ -143,7 +143,7 @@ sections:
       Application Proxy no agrega automáticamente el encabezado HTTP Strict-Transport-Security a las respuestas HTTPS, pero mantendrá el encabezado si está en la respuesta original enviada por la aplicación publicada. La incorporación de una configuración para habilitar esta funcionalidad está en el mapa de ruta.
   - question: >
       Autenticación integrada de Windows
-    answer: ''
+    answer: ' '
   - question: >
       ¿Cuándo debo usar el método PrincipalsAllowedToDelegateToAccount al configurar la delegación restringida de Kerberos (KCD)?
     answer: >
@@ -168,7 +168,7 @@ sections:
       En este caso, habrá una reserva para "Nombre principal de usuario". Para más información sobre el escenario B2B, consulte [Conceder a los usuarios de B2B en Azure AD acceso a las aplicaciones locales](../external-identities/hybrid-cloud-to-on-premises.md).
   - question: >
       Autenticación de paso a través
-    answer: ''
+    answer: ' '
   - question: >
       ¿Puedo usar directivas de acceso condicional en aplicaciones publicadas con la autenticación de paso a través?
     answer: >
@@ -178,7 +178,7 @@ sections:
     answer: "No, este escenario no se admite porque Application Proxy finalizaría el tráfico TLS.  \n"
   - question: >
       Publicación de la Puerta de enlace de Escritorio remoto
-    answer: ''
+    answer: ' '
   - question: >
       ¿Cómo se puede publicar la Puerta de enlace de Escritorio remoto con Azure AD Application Proxy?
     answer: >
@@ -202,7 +202,7 @@ sections:
     answer: Esta opción permite al usuario descargar el archivo rdp y que lo use otro cliente RDP (fuera del cliente web del Escritorio remoto). Por lo general, otros clientes RDP (como el cliente de Escritorio remoto de Microsoft) no pueden realizar la autenticación previa de forma nativa. Por eso no funcionará esta opción.
   - question: >
       Publicación de SharePoint
-    answer: ''
+    answer: ' '
   - question: >
       ¿Cómo se puede publicar SharePoint en Azure AD Application Proxy?
     answer: >
@@ -212,7 +212,7 @@ sections:
     answer: >
       Actualmente, la [aplicación móvil de SharePoint](/sharepoint/administration/supporting-the-sharepoint-mobile-apps-online-and-on-premises) no admite la autenticación previa con Azure Active Directory.
   - question: "Publicación de Servicios de federación de Active Directory (AD FS) \n"
-    answer: ''
+    answer: ' '
   - question: >
       ¿Puedo usar Azure AD Application Proxy como proxy de AD FS (esto es, como un proxy de aplicación web)?
     answer: >
@@ -222,7 +222,7 @@ sections:
     answer: "No, no se admite.\n         \n"
   - question: >
       WebSocket
-    answer: ''
+    answer: ' '
   - question: >
       ¿Admite WebSocket el trabajo para aplicaciones que no sean QlikSense y Escritorio remoto cliente web (HTML5)?
     answer: >
@@ -232,13 +232,13 @@ sections:
       Las características (EventLog, PowerShell y Servicios de Escritorio remoto) en Windows Admin Center (WAC) no funcionan actualmente a través de Azure AD Application Proxy.
   - question: >
       Traducción de vínculos
-    answer: ''
+    answer: ' '
   - question: >
       ¿El uso de la traducción de vínculos afecta al rendimiento?
     answer: "Sí. El uso de la traducción de vínculos afecta al rendimiento. El servicio Application Proxy escanea la aplicación en busca de enlaces codificados y los reemplaza con sus respectivas direcciones URL externas publicadas, antes de presentarlas al usuario. \n\nPara obtener el mejor rendimiento, se recomienda usar direcciones URL internas y externas idénticas mediante la configuración de los [dominios personalizados](./application-proxy-configure-custom-domain.md). Si no es posible usar dominios personalizados, puede mejorar el rendimiento de la traducción de vínculos mediante la extensión del inicio de sesión seguro de Mis aplicaciones o el explorador Microsoft Edge en dispositivos móviles. Consulte [Redirección de los vínculos codificados de manera rígida para las aplicaciones publicadas con Azure AD Application Proxy](./application-proxy-configure-hard-coded-link-translation.md).\n"
   - question: >
       Caracteres comodín
-    answer: ''
+    answer: ' '
   - question: >
       ¿Cómo puedo usar caracteres comodín para publicar dos aplicaciones con el mismo nombre de dominio personalizado, pero con diferentes protocolos, uno para HTTP y otro para HTTPS?
     answer: >-
