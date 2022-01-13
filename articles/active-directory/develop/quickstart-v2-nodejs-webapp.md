@@ -7,17 +7,17 @@ author: jmprieur
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: quickstart
+ms.topic: portal
 ms.workload: identity
-ms.date: 10/28/2019
+ms.date: 11/22/2021
 ms.author: jmprieur
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:ASP.NET, devx-track-js
-ms.openlocfilehash: f0b75b49ce36ef4fb3e45b76ace5402dd5c39efe
-ms.sourcegitcommit: 702df701fff4ec6cc39134aa607d023c766adec3
+ms.custom: aaddev, identityplatformtop40, "scenarios:getting-started", "languages:ASP.NET", devx-track-js, mode-api
+ms.openlocfilehash: 1076a8b7bcd68c3192e3a67ce737ab50b0ce1c45
+ms.sourcegitcommit: 34d047300d800cf6ff7d9dd3e573a0d785f61abc
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/03/2021
-ms.locfileid: "131456202"
+ms.lasthandoff: 01/12/2022
+ms.locfileid: "135901145"
 ---
 # <a name="quickstart-add-sign-in-using-openid-connect-to-a-nodejs-web-app"></a>Inicio rápido: Incorporación del inicio de sesión mediante OpenID Connect a una aplicación web de Node.js
 
@@ -31,7 +31,7 @@ En este inicio rápido, descargará y ejecutará un código de ejemplo que muest
 ## <a name="register-your-application"></a>Registrar su aplicación
 
 1. Inicie sesión en <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>.
-1. Si tiene acceso a varios inquilinos, use el filtro **Directorios y suscripciones** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para ir al inquilino en el que quiere registrar la aplicación.
+1. Si tiene acceso a varios inquilinos, use el filtro **Directorios y suscripciones**:::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para ir al inquilino en el que quiere registrar la aplicación.
 1. Busque y seleccione **Azure Active Directory**.
 1. En **Administrar**, seleccione **Registros de aplicaciones** >  y, luego, **Nuevo registro**.
 1. Escriba el **Nombre** de la aplicación, por ejemplo `MyWebApp`. Los usuarios de la aplicación pueden ver este nombre, el cual se puede cambiar más tarde.

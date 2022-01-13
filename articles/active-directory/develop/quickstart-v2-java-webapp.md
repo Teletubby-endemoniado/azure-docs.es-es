@@ -7,17 +7,17 @@ author: mmacy
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: quickstart
+ms.topic: portal
 ms.workload: identity
-ms.date: 10/09/2019
+ms.date: 11/22/2021
 ms.author: marsma
-ms.custom: aaddev, scenarios:getting-started, languages:Java, devx-track-java
-ms.openlocfilehash: 8b965d54eab6f979b67382c91e09b23732278732
-ms.sourcegitcommit: 106f5c9fa5c6d3498dd1cfe63181a7ed4125ae6d
+ms.custom: aaddev, "scenarios:getting-started", "languages:Java", devx-track-java, mode-api
+ms.openlocfilehash: c90516fb5012774f11463f06ab26f74b0dc5c06c
+ms.sourcegitcommit: 34d047300d800cf6ff7d9dd3e573a0d785f61abc
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "131040216"
+ms.lasthandoff: 01/12/2022
+ms.locfileid: "135921467"
 ---
 # <a name="quickstart-add-sign-in-with-microsoft-to-a-java-web-app"></a>Inicio rápido: Adición de inicio de sesión con Microsoft a una aplicación web de Java
 
@@ -32,116 +32,46 @@ Para ejecutar esta muestra, necesita:
 - [Kit de desarrollo de Java (JDK)](https://openjdk.java.net/) 8 o superior.
 - [Maven](https://maven.apache.org/).
 
-> [!div renderon="docs"]
-> ## <a name="register-and-download-your-quickstart-app"></a>Registro y descarga de la aplicación de inicio rápido
-> Hay dos formas de iniciar la aplicación de inicio rápido: rápido (opción 1) y manual (opción 2).
->
-> ### <a name="option-1-register-and-automatically-configure-your-app-and-then-download-the-code-sample"></a>Opción 1: Registrar y configurar de modo automático una aplicación y, luego, descargar el código de ejemplo
->
-> 1. Vaya a la experiencia de inicio rápido <a href="https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/applicationsListBlade/quickStartType/JavaQuickstartPage/sourceType/docs" target="_blank">Azure Portal: Registros de aplicaciones</a>.
-> 1. Escriba un nombre para la aplicación y seleccione **Registrar**.
-> 1. Siga las instrucciones de la experiencia de inicio rápido del portal para descargar el código de aplicación configurado automáticamente.
->
-> ### <a name="option-2-register-and-manually-configure-your-application-and-code-sample"></a>Opción 2: registrar y configurar manualmente la aplicación y el código de ejemplo
->
-> #### <a name="step-1-register-your-application"></a>Paso 1: Registrar su aplicación
->
-> Para registrar una aplicación y agregarle manualmente información del registro de la aplicación, siga estos pasos:
->
-> 1. Inicie sesión en <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>.
-> 1. Si tiene acceso a varios inquilinos, use el filtro **Directorios y suscripciones** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para ir al inquilino en el que quiere registrar la aplicación.
-> 1. Busque y seleccione **Azure Active Directory**.
-> 1. En **Administrar**, seleccione **Registros de aplicaciones**.
-> 1. Seleccione **Nuevo registro**.
-> 1. Escriba el **nombre** de la aplicación, por ejemplo, **java-webapp**. Los usuarios de la aplicación verían este nombre. Puede cambiarlo posteriormente.
-> 1. Seleccione **Registrar**.
-> 1. En la página **Información general**, anote los valores de **Id. de aplicación (cliente)** e **Id. de directorio (inquilino)** . Estos valores se necesitarán más adelante.
-> 1. En **Administrar**, seleccione **Autenticación**.
-> 1. Seleccione **Agregar una plataforma** > **Web**.
-> 1. En la sección **URI de redirección**, escriba `https://localhost:8443/msal4jsample/secure/aad`.
-> 1. Seleccione **Configurar**.
-> 1. En la sección **Web**, en **URI de redirección**, escriba `https://localhost:8443/msal4jsample/graph/me` como un segundo identificador URI de redirección.
-> 1. En **Administrar**, seleccione **Certificados y secretos**. En la sección **Secretos de cliente**, seleccione **Nuevo secreto de cliente**.
-> 1. Escriba una descripción de la clave (por ejemplo, *secreto de aplicación*), deje el valor de expiración predeterminado y seleccione **Agregar**.
-> 1. Anote el **valor** del secreto de cliente. Lo necesitará más adelante.
 
-> [!div class="sxs-lookup" renderon="portal"]
-> #### <a name="step-1-configure-your-application-in-the-azure-portal"></a>Paso 1: Configuración de la aplicación en Azure Portal
->
-> Para usar el código de ejemplo en este inicio rápido:
->
-> 1. Agregar las direcciones URL de respuesta `https://localhost:8443/msal4jsample/secure/aad` y `https://localhost:8443/msal4jsample/graph/me`.
-> 1. Crear un secreto de cliente.
-> > [!div renderon="portal" id="makechanges" class="nextstepaction"]
-> > [Realizar estos cambios por mí]()
->
-> > [!div id="appconfigured" class="alert alert-info"]
-> > ![Ya configurada](media/quickstart-v2-aspnet-webapp/green-check.png) La aplicación está configurada con estos atributos.
+#### <a name="step-1-configure-your-application-in-the-azure-portal"></a>Paso 1: Configuración de la aplicación en Azure Portal
+
+Para usar el código de ejemplo en este inicio rápido:
+
+1. Agregar las direcciones URL de respuesta `https://localhost:8443/msal4jsample/secure/aad` y `https://localhost:8443/msal4jsample/graph/me`.
+1. Crear un secreto de cliente.
+> [!div class="nextstepaction"]
+> [Realizar estos cambios por mí]()
+
+> [!div class="alert alert-info"]
+> ![Ya configurada](media/quickstart-v2-aspnet-webapp/green-check.png) La aplicación está configurada con estos atributos.
 
 #### <a name="step-2-download-the-code-sample"></a>Paso 2: Descargar el código de ejemplo
-> [!div renderon="docs"]
+
+Descargue el proyecto y extraiga el archivo .zip en una carpeta cerca de la raíz de la unidad. Por ejemplo, *C:\Azure-Samples*.
+
+Para usar HTTPS con localhost, especifique las propiedades de `server.ssl.key`. Para generar un certificado autofirmado, use la utilidad keytool (que se incluye en JRE).
+
+Este es un ejemplo:
+```
+  keytool -genkeypair -alias testCert -keyalg RSA -storetype PKCS12 -keystore keystore.p12 -storepass password
+
+  server.ssl.key-store-type=PKCS12
+  server.ssl.key-store=classpath:keystore.p12
+  server.ssl.key-store-password=password
+  server.ssl.key-alias=testCert
+  ```
+  Coloque el archivo del almacén de claves generado en la carpeta *resources*.
+
+> [!div class="sxs-lookup nextstepaction"]
 > [Descargar el código de ejemplo](https://github.com/Azure-Samples/ms-identity-java-webapp/archive/master.zip)
 
-> [!div class="sxs-lookup" renderon="portal"]
-> Descargue el proyecto y extraiga el archivo .zip en una carpeta cerca de la raíz de la unidad. Por ejemplo, *C:\Azure-Samples*.
->
-> Para usar HTTPS con localhost, especifique las propiedades de `server.ssl.key`. Para generar un certificado autofirmado, use la utilidad keytool (que se incluye en JRE).
->
-> Este es un ejemplo:
->  ```
->   keytool -genkeypair -alias testCert -keyalg RSA -storetype PKCS12 -keystore keystore.p12 -storepass password
->
->   server.ssl.key-store-type=PKCS12
->   server.ssl.key-store=classpath:keystore.p12
->   server.ssl.key-store-password=password
->   server.ssl.key-alias=testCert
->   ```
->   Coloque el archivo del almacén de claves generado en la carpeta *resources*.
-
-> [!div renderon="portal" id="autoupdate" class="sxs-lookup nextstepaction"]
-> [Descargar el código de ejemplo](https://github.com/Azure-Samples/ms-identity-java-webapp/archive/master.zip)
-
-> [!div class="sxs-lookup" renderon="portal"]
+> [!div class="sxs-lookup"]
 > > [!NOTE]
 > > `Enter_the_Supported_Account_Info_Here`
 
-> [!div renderon="docs"]
-> #### <a name="step-3-configure-the-code-sample"></a>Paso 3: Configurar el ejemplo de código
-> 1. Extraiga el archivo zip en una carpeta local.
-> 1. *Opcional.* Si usa un entorno de desarrollo integrado, abra el ejemplo en dicho entorno.
-> 1. Abra el archivo *application.properties*. Puede encontrarlo en la carpeta *src/main/resources/* . Reemplace los valores de los campos `aad.clientId`, `aad.authority`y `aad.secretKey` por los de identificador de aplicación, identificador de inquilino y secreto de cliente, respectivamente. Así es como debería ser:
->
->    ```file
->    aad.clientId=Enter_the_Application_Id_here
->    aad.authority=https://login.microsoftonline.com/Enter_the_Tenant_Info_Here/
->    aad.secretKey=Enter_the_Client_Secret_Here
->    aad.redirectUriSignin=https://localhost:8443/msal4jsample/secure/aad
->    aad.redirectUriGraph=https://localhost:8443/msal4jsample/graph/me
->    aad.msGraphEndpointHost="https://graph.microsoft.com/"
->    ```
->    En el código anterior:
->
->    - `Enter_the_Application_Id_here` es el identificador de la aplicación que registró.
->    - `Enter_the_Client_Secret_Here`: es el valor de **Secreto de cliente** que creó en **Certificados y secretos** para la aplicación registrada.
->    - `Enter_the_Tenant_Info_Here`: es el valor de **Id. de directorio (inquilino)** de la aplicación que registró.
-> 1. Para usar HTTPS con localhost, especifique las propiedades de `server.ssl.key`. Para generar un certificado autofirmado, use la utilidad keytool (que se incluye en JRE).
->
->    Este es un ejemplo:
->
->     ```
->      keytool -genkeypair -alias testCert -keyalg RSA -storetype PKCS12 -keystore keystore.p12 -storepass password
->
->      server.ssl.key-store-type=PKCS12
->      server.ssl.key-store=classpath:keystore.p12
->      server.ssl.key-store-password=password
->      server.ssl.key-alias=testCert
->      ```
->   1. Coloque el archivo del almacén de claves generado en la carpeta *resources*.
+> [!div class="sxs-lookup"]
 
-> [!div class="sxs-lookup" renderon="portal"]
-> #### <a name="step-3-run-the-code-sample"></a>Paso 3: Ejecución del ejemplo de código
-> [!div renderon="docs"]
-> #### <a name="step-4-run-the-code-sample"></a>Paso 4: Ejecución del ejemplo de código
+#### <a name="step-3-run-the-code-sample"></a>Paso 3: Ejecución del ejemplo de código
 
 Para ejecutar el proyecto, realice uno de estos pasos:
 
