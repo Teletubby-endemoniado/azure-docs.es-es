@@ -7,81 +7,80 @@ author: jmprieur
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: quickstart
+ms.topic: portal
 ms.workload: identity
-ms.date: 09/22/2020
+ms.date: 01/11/2022
 ms.author: jmprieur
-ms.custom: devx-track-csharp, scenarios:getting-started, languages:aspnet-core
-ms.openlocfilehash: f70c35f55256ef98dd261a13058f1b6ad5330d9f
-ms.sourcegitcommit: f6e2ea5571e35b9ed3a79a22485eba4d20ae36cc
+ms.custom: devx-track-csharp, "scenarios:getting-started", "languages:aspnet-core", mode-api
+ms.openlocfilehash: c30b50ae0f5eb92f21232096e032a214ec05e316
+ms.sourcegitcommit: 04420fb4695bd70408d9854ad5b2af8a9bbfbc64
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/24/2021
-ms.locfileid: "128616809"
+ms.lasthandoff: 01/15/2022
+ms.locfileid: "136846752"
 ---
 # <a name="quickstart-protect-an-aspnet-core-web-api-with-the-microsoft-identity-platform"></a>Inicio rápido: Protección de una API web de ASP.NET Core con la plataforma de identidad de Microsoft
 
 En este inicio rápido, descargará un código de ejemplo de una API web de ASP.NET Core y revisará cómo restringe el acceso a los recursos solo a las cuentas autorizadas. El ejemplo admite la autorización de cuentas personales de Microsoft y cuentas de cualquier organización de Azure Active Directory (Azure AD).
 
-> [!div renderon="docs"]
-> ## <a name="prerequisites"></a>Requisitos previos
->
-> - Cuenta de Azure con una suscripción activa. [Cree una cuenta gratuita](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-> - [Inquilino de Azure Active Directory](quickstart-create-new-tenant.md)
-> - [SDK de .NET Core 3.1+](https://dotnet.microsoft.com/)
-> - [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) o [Visual Studio Code](https://code.visualstudio.com/)
->
-> ## <a name="step-1-register-the-application"></a>Paso 1: Registro de la aplicación
->
-> En primer lugar, registre la API web en el inquilino de Azure AD y agregue un ámbito siguiendo estos pasos:
->
-> 1. Inicie sesión en <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>.
-> 1. Si tiene acceso a varios inquilinos, use el filtro **Directorios y suscripciones** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para ir al inquilino en el que quiere registrar la aplicación.
-> 1. Busque y seleccione **Azure Active Directory**.
-> 1. En **Administrar**, seleccione **Registros de aplicaciones** >  y, luego, **Nuevo registro**.
-> 1. Escriba un **nombre** para la aplicación. Por ejemplo, escriba **AspNetCoreWebApi-Quickstart**. Los usuarios de la aplicación verán este nombre, que puede cambiar más tarde.
-> 1. Seleccione **Registrar**.
-> 1. En **Administrar**, seleccione **Exponer una API** > **Agregar un ámbito**. Acepte el valor predeterminado de **URI de id. de la aplicación**, para lo que debe seleccionar **Guardar y continuar**, y escriba los siguientes datos:
->    - **Nombre de ámbito**: `access_as_user`
->    - **¿Quién puede dar el consentimiento?** : **Administradores y usuarios**
->    - **Nombre para mostrar del consentimiento del administrador**: `Access AspNetCoreWebApi-Quickstart`
->    - **Descripción del consentimiento del administrador**: `Allows the app to access AspNetCoreWebApi-Quickstart as the signed-in user.`
->    - **Nombre para mostrar del consentimiento del usuario**: `Access AspNetCoreWebApi-Quickstart`
->    - **Descripción del consentimiento del usuario**: `Allow the application to access AspNetCoreWebApi-Quickstart on your behalf.`
->    - **Estado**: **Enabled**
-> 1. Seleccione **Agregar ámbito** para completar la adición del ámbito.
+
+## <a name="prerequisites"></a>Requisitos previos
+
+- Cuenta de Azure con una suscripción activa. [Cree una cuenta gratuita](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- [Inquilino de Azure Active Directory](quickstart-create-new-tenant.md)
+- [SDK de .NET Core 3.1+](https://dotnet.microsoft.com/)
+- [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) o [Visual Studio Code](https://code.visualstudio.com/)
+
+## <a name="step-1-register-the-application"></a>Paso 1: Registro de la aplicación
+
+En primer lugar, registre la API web en el inquilino de Azure AD y agregue un ámbito siguiendo estos pasos:
+
+1. Inicie sesión en [Azure Portal](https://portal.azure.com/).
+1. Si tiene acceso a varios inquilinos, use el filtro **Directorios y suscripciones**:::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para ir al inquilino en el que quiere registrar la aplicación.
+1. Busque y seleccione **Azure Active Directory**.
+1. En **Administrar**, seleccione **Registros de aplicaciones** >  y, luego, **Nuevo registro**.
+1. Escriba un **nombre** para la aplicación. Por ejemplo, escriba **AspNetCoreWebApi-Quickstart**. Los usuarios de la aplicación verán este nombre, que puede cambiar más tarde.
+1. Seleccione **Registrar**.
+1. En **Administrar**, seleccione **Exponer una API** > **Agregar un ámbito**. Acepte el valor predeterminado de **URI de id. de la aplicación**, para lo que debe seleccionar **Guardar y continuar**, y escriba los siguientes datos:
+    - **Nombre de ámbito**: `access_as_user`
+   - **¿Quién puede dar el consentimiento?** : **Administradores y usuarios**
+   - **Nombre para mostrar del consentimiento del administrador**: `Access AspNetCoreWebApi-Quickstart`
+   - **Descripción del consentimiento del administrador**: `Allows the app to access AspNetCoreWebApi-Quickstart as the signed-in user.`
+   - **Nombre para mostrar del consentimiento del usuario**: `Access AspNetCoreWebApi-Quickstart`
+   - **Descripción del consentimiento del usuario**: `Allow the application to access AspNetCoreWebApi-Quickstart on your behalf.`
+   - **Estado**: **Enabled**
+1. Seleccione **Agregar ámbito** para completar la adición del ámbito.
 
 ## <a name="step-2-download-the-aspnet-core-project"></a>Paso 2: Descarga del proyecto de ASP.NET Core
 
-> [!div renderon="docs"]
-> [Descargue la solución de ASP.NET Core](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2/archive/aspnetcore3-1.zip) de GitHub.
+[Descargue la solución de ASP.NET Core](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2/archive/aspnetcore3-1.zip) de GitHub.
 
 [!INCLUDE [active-directory-develop-path-length-tip](../../../includes/active-directory-develop-path-length-tip.md)]
 
-> [!div renderon="docs"]
-> ## <a name="step-3-configure-the-aspnet-core-project"></a>Paso 3: Configuración del proyecto de ASP.NET Core
->
-> En este paso, configure el código de ejemplo para que funcione con el registro de la aplicación que creó anteriormente.
->
-> 1. Extraiga el archivo. zip en una carpeta cerca de la raíz de la unidad. Por ejemplo, en *C:\Azure-Samples*.
->
->    Se recomienda extraer el archivo en un directorio próximo a la raíz de la unidad para evitar errores provocados por las limitaciones de longitud de la ruta de acceso en Windows.
->
-> 1. Abra la solución en la carpeta *webapi* en el editor de código.
-> 1. Abra el archivo *appsettings.json* y modifique el código siguiente:
->
->    ```json
->    "ClientId": "Enter_the_Application_Id_here",
->    "TenantId": "Enter_the_Tenant_Info_Here"
->    ```
->
->    - Reemplace `Enter_the_Application_Id_here` por el identificador de aplicación (cliente) que ha registrado en Azure Portal. Puede encontrar el valor del identificador de aplicación (cliente) en la página **Información general** de la aplicación.
->    - Reemplace `Enter_the_Tenant_Info_Here` por una de las opciones siguientes:
->       - Si la aplicación admite **Solo las cuentas de este directorio organizativo**, reemplace este valor por el identificador de directorio (inquilino) (un GUID) o por el nombre del inquilino (por ejemplo, `contoso.onmicrosoft.com`). Puede encontrar el identificador de directorio (inquilino) en la página **Información general** de la aplicación.
->       - Si la aplicación admite **Cuentas en cualquier directorio organizativo**, reemplace este valor por `organizations`.
->       - Si la aplicación admite **Todos los usuarios de cuentas Microsoft**, establezca el valor en `common`.
->
-> Para esta guía de inicio rápido, no cambie ningún otro valor del archivo *appsettings.json*.
+
+## <a name="step-3-configure-the-aspnet-core-project"></a>Paso 3: Configuración del proyecto de ASP.NET Core
+
+En este paso, configure el código de ejemplo para que funcione con el registro de la aplicación que creó anteriormente.
+
+1. Extraiga el archivo. zip en una carpeta cerca de la raíz de la unidad. Por ejemplo, en *C:\Azure-Samples*.
+
+   Se recomienda extraer el archivo en un directorio próximo a la raíz de la unidad para evitar errores provocados por las limitaciones de longitud de la ruta de acceso en Windows.
+
+1. Abra la solución en la carpeta *webapi* en el editor de código.
+1. Abra el archivo *appsettings.json* y modifique el código siguiente:
+
+   ```json
+   "ClientId": "Enter_the_Application_Id_here",
+   "TenantId": "Enter_the_Tenant_Info_Here"
+   ```
+
+   - Reemplace `Enter_the_Application_Id_here` por el identificador de aplicación (cliente) que ha registrado en Azure Portal. Puede encontrar el valor del identificador de aplicación (cliente) en la página **Información general** de la aplicación.
+   - Reemplace `Enter_the_Tenant_Info_Here` por una de las opciones siguientes:
+      - Si la aplicación admite **Solo las cuentas de este directorio organizativo**, reemplace este valor por el identificador de directorio (inquilino) (un GUID) o por el nombre del inquilino (por ejemplo, `contoso.onmicrosoft.com`). Puede encontrar el identificador de directorio (inquilino) en la página **Información general** de la aplicación.
+      - Si la aplicación admite **Cuentas en cualquier directorio organizativo**, reemplace este valor por `organizations`.
+      - Si la aplicación admite **Todos los usuarios de cuentas Microsoft**, establezca el valor en `common`.
+
+Para esta guía de inicio rápido, no cambie ningún otro valor del archivo *appsettings.json*.
 
 ## <a name="how-the-sample-works"></a>Funcionamiento del ejemplo
 

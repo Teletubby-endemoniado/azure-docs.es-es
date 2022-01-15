@@ -7,17 +7,17 @@ author: mmacy
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: quickstart
+ms.topic: portal
 ms.workload: identity
-ms.date: 10/15/2019
+ms.date: 01/14/2022
 ms.author: marsma
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:Android, has-adal-ref
-ms.openlocfilehash: 794e173bdd1dd70873cd17f64ac4f24022bd738c
-ms.sourcegitcommit: 1deb51bc3de58afdd9871bc7d2558ee5916a3e89
+ms.custom: aaddev, identityplatformtop40, "scenarios:getting-started", "languages:Android", has-adal-ref, mode-api
+ms.openlocfilehash: 5d6285b173d023cc6a381ddfe9842d620f73da4a
+ms.sourcegitcommit: 04420fb4695bd70408d9854ad5b2af8a9bbfbc64
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/19/2021
-ms.locfileid: "122429087"
+ms.lasthandoff: 01/15/2022
+ms.locfileid: "136846354"
 ---
 # <a name="quickstart-sign-in-users-and-call-the-microsoft-graph-api-from-an-android-app"></a>Inicio rápido: Inicie sesión de los usuarios y llame a Microsoft Graph API desde una aplicación de Android
 
@@ -33,62 +33,40 @@ Las aplicaciones tienen que estar representadas por un objeto de aplicación en 
 * Android Studio
 * Android 16 +
 
-> [!div class="sxs-lookup" renderon="portal"]
-> ### <a name="step-1-configure-your-application-in-the-azure-portal"></a>Paso 1: Configuración de la aplicación en Azure Portal
-> Para que el código de ejemplo de este inicio rápido funcione, agregue un **identificador URI de redirección** compatible con el agente de autenticación.
-> > [!div renderon="portal" id="makechanges" class="nextstepaction"]
-> > [Realizar estos cambios por mí]()
->
-> > [!div id="appconfigured" class="alert alert-info"]
-> > ![Ya configurada](media/quickstart-v2-android/green-check.png) La aplicación está configurada con estos atributos
->
-> ### <a name="step-2-download-the-project"></a>Paso 2: Descarga del proyecto
-> [!div class="sxs-lookup" renderon="portal"]
-> Ejecute el proyecto con Android Studio.
-> [!div class="sxs-lookup" renderon="portal" id="autoupdate" class="nextstepaction"]
-> [Descargar el código de ejemplo](https://github.com/Azure-Samples/ms-identity-android-java/archive/master.zip)
->
-> [!div class="sxs-lookup" renderon="portal"]
-> ### <a name="step-3-your-app-is-configured-and-ready-to-run"></a>Paso 3: La aplicación está configurada y lista para ejecutarse
-> Hemos configurado el proyecto con los valores de las propiedades de su aplicación y está preparado para ejecutarse.
-> La aplicación de ejemplo se inicia en la pantalla **Modo de cuenta única**. De forma predeterminada, se proporciona un ámbito predeterminado, **user.read**, que se usa al leer sus propios datos de perfil en la llamada a Microsoft Graph API. La dirección URL de la llamada a Microsoft Graph API se proporciona de forma predeterminada. Ambos elementos se pueden cambiar si se desea.
->
-> ![Aplicación de ejemplo de MSAL que muestra el uso de una cuenta y de varias](./media/quickstart-v2-android/quickstart-sample-app.png)
->
-> Use el menú de la aplicación para cambiar entre los modos de una y varias cuentas.
->
-> En el modo de una cuenta única, inicie sesión con una cuenta profesional o personal:
->
-> 1. Seleccione **Get graph data interactively (Obtener datos de gráfico de forma interactiva)** para pedir al usuario sus credenciales. El resultado de la llamada a Microsoft Graph API aparecerá en la parte inferior de la pantalla.
-> 2. Una vez que haya iniciado sesión, seleccione **Get graph data silently** (Obtener datos de gráfico sin intervención del usuario) para realizar una llamada a Microsoft Graph API sin volver a pedir las credenciales al usuario. El resultado de la llamada a Microsoft Graph API aparecerá en la parte inferior de la pantalla.
->
-> En el modo de varias cuentas, puede repetir los mismos pasos.  Además, puede quitar la cuenta con la que se ha iniciado sesión, lo que también quita los tokens almacenados en caché de esa cuenta.
+### <a name="step-1-configure-your-application-in-the-azure-portal"></a>Paso 1: Configuración de la aplicación en Azure Portal
+Para que el código de ejemplo de este inicio rápido funcione, agregue un **identificador URI de redirección** compatible con el agente de autenticación.
+> [!div class="nextstepaction"]
+> [Realizar estos cambios por mí]()
 
-> [!div class="sxs-lookup" renderon="portal"]
+> [!div class="alert alert-info"]
+> ![Ya configurada](media/quickstart-v2-android/green-check.png) La aplicación está configurada con estos atributos
+
+### <a name="step-2-download-the-project"></a>Paso 2: Descarga del proyecto
+
+Ejecute el proyecto con Android Studio.
+> [!div class="nextstepaction"]
+> [Descargar el código de ejemplo](https://github.com/Azure-Samples/ms-identity-android-java/archive/master.zip)
+
+
+### <a name="step-3-your-app-is-configured-and-ready-to-run"></a>Paso 3: La aplicación está configurada y lista para ejecutarse
+
+Hemos configurado el proyecto con los valores de las propiedades de su aplicación y está preparado para ejecutarse.
+La aplicación de ejemplo se inicia en la pantalla **Modo de cuenta única**. De forma predeterminada, se proporciona un ámbito predeterminado, **user.read**, que se usa al leer sus propios datos de perfil en la llamada a Microsoft Graph API. La dirección URL de la llamada a Microsoft Graph API se proporciona de forma predeterminada. Ambos elementos se pueden cambiar si se desea.
+
+![Aplicación de ejemplo de MSAL que muestra el uso de una cuenta y de varias](./media/quickstart-v2-android/quickstart-sample-app.png)
+
+Use el menú de la aplicación para cambiar entre los modos de una y varias cuentas.
+
+En el modo de una cuenta única, inicie sesión con una cuenta profesional o personal:
+
+1. Seleccione **Get graph data interactively (Obtener datos de gráfico de forma interactiva)** para pedir al usuario sus credenciales. El resultado de la llamada a Microsoft Graph API aparecerá en la parte inferior de la pantalla.
+2. Una vez que haya iniciado sesión, seleccione **Get graph data silently** (Obtener datos de gráfico sin intervención del usuario) para realizar una llamada a Microsoft Graph API sin volver a pedir las credenciales al usuario. El resultado de la llamada a Microsoft Graph API aparecerá en la parte inferior de la pantalla.
+
+En el modo de varias cuentas, puede repetir los mismos pasos.  Además, puede quitar la cuenta con la que se ha iniciado sesión, lo que también quita los tokens almacenados en caché de esa cuenta.
+
+> [!div class="sxs-lookup"]
 > > [!NOTE]
 > > `Enter_the_Supported_Account_Info_Here`
-
-> [!div renderon="docs"]
-> ## <a name="step-1-get-the-sample-app"></a>Paso 1: Obtención de la aplicación de ejemplo
->
-> [Descargue el código](https://github.com/Azure-Samples/ms-identity-android-java/archive/master.zip).
->
-> ## <a name="step-2-run-the-sample-app"></a>Paso 2: Ejecutar la aplicación de ejemplo
->
-> Seleccione el emulador o dispositivo físico del menú desplegable **dispositivos disponibles** de Android Studio y ejecute la aplicación.
->
-> La aplicación de ejemplo se inicia en la pantalla **Modo de cuenta única**. De forma predeterminada, se proporciona un ámbito predeterminado, **user.read**, que se usa al leer sus propios datos de perfil en la llamada a Microsoft Graph API. La dirección URL de la llamada a Microsoft Graph API se proporciona de forma predeterminada. Ambos elementos se pueden cambiar si se desea.
->
-> ![Aplicación de ejemplo de MSAL que muestra el uso de una cuenta y de varias](./media/quickstart-v2-android/quickstart-sample-app.png)
->
-> Use el menú de la aplicación para cambiar entre los modos de una y varias cuentas.
->
-> En el modo de una cuenta única, inicie sesión con una cuenta profesional o personal:
->
-> 1. Seleccione **Get graph data interactively (Obtener datos de gráfico de forma interactiva)** para pedir al usuario sus credenciales. El resultado de la llamada a Microsoft Graph API aparecerá en la parte inferior de la pantalla.
-> 2. Una vez que haya iniciado sesión, seleccione **Get graph data silently** (Obtener datos de gráfico sin intervención del usuario) para realizar una llamada a Microsoft Graph API sin volver a pedir las credenciales al usuario. El resultado de la llamada a Microsoft Graph API aparecerá en la parte inferior de la pantalla.
->
-> En el modo de varias cuentas, puede repetir los mismos pasos.  Además, puede quitar la cuenta con la que se ha iniciado sesión, lo que también quita los tokens almacenados en caché de esa cuenta.
 
 ## <a name="how-the-sample-works"></a>Funcionamiento del ejemplo
 ![Captura de pantalla de la aplicación de muestra](media/quickstart-v2-android/android-intro.svg)

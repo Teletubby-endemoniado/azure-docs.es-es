@@ -7,17 +7,17 @@ author: jmprieur
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: quickstart
+ms.topic: portal
 ms.workload: identity
-ms.date: 10/05/2020
+ms.date: 01/11/2022
 ms.author: jmprieur
-ms.custom: devx-track-csharp, aaddev, identityplatformtop40, scenarios:getting-started, languages:ASP.NET
-ms.openlocfilehash: 79557d889e4942c7cb7e4ae849b1da84c12a3712
-ms.sourcegitcommit: 02d443532c4d2e9e449025908a05fb9c84eba039
+ms.custom: devx-track-csharp, aaddev, identityplatformtop40, "scenarios:getting-started", "languages:ASP.NET", mode-api
+ms.openlocfilehash: 57bcd6562862210be21c17680842de44168c435b
+ms.sourcegitcommit: 04420fb4695bd70408d9854ad5b2af8a9bbfbc64
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 05/06/2021
-ms.locfileid: "108748734"
+ms.lasthandoff: 01/15/2022
+ms.locfileid: "136847819"
 ---
 # <a name="quickstart-call-an-aspnet-web-api-thats-protected-by-microsoft-identity-platform"></a>Inicio rápido: Llamada a una instancia de ASP.NET Web API protegida por una plataforma de identidad de Microsoft
 
@@ -48,8 +48,8 @@ Puede obtener el ejemplo de cualquiera de estas dos maneras:
 
 Registre la API web en **Registros de aplicaciones**, en Azure Portal.
 
-1. Inicie sesión en <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>.
-1. Si tiene acceso a varios inquilinos, use el filtro **Directorio + suscripción** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para seleccionar el inquilino en el que desea registrar una aplicación.
+1. Inicie sesión en [Azure Portal](https://portal.azure.com/).
+1. Si tiene acceso a varios inquilinos, use el filtro **Directorio + suscripción**:::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para seleccionar el inquilino en el que desea registrar una aplicación.
 1. Busque y seleccione **Azure Active Directory**.
 1. En **Administrar**, seleccione **Registros de aplicaciones** >  y, luego, **Nuevo registro**.
 1. Escriba el **Nombre** de la aplicación, por ejemplo `AppModelv2-NativeClient-DotNet-TodoListService`. Los usuarios de la aplicación pueden ver este nombre, el cual se puede cambiar más tarde.
@@ -132,13 +132,23 @@ Configure el proyecto TodoListClient agregando el identificador de aplicación a
 
 1. En el directorio raíz del proyecto TodoListClient, abra el archivo *app.config* y pegue el valor del identificador de la aplicación en el parámetro `ida:ClientId`.
 
-## <a name="run-your-todolistclient-project"></a>Ejecución del proyecto TodoListClient
+## <a name="run-your-projects"></a>Ejecución de los proyectos
+
+Inicie ambos proyectos. Si utiliza Visual Studio:
+
+1. Haga clic con el botón derecho en la solución de Visual Studio y seleccione **Propiedades**
+
+1. En **Propiedades comunes**, seleccione **Proyecto de inicio** y, a continuación, haga clic en **Proyectos de inicio múltiples**. 
+
+1. En ambos proyectos, elija **Iniciar** como acción
+
+1. Para asegurarse de que el servicio TodoListService se inicia primero, muévalo a la primer posición de la lista con la flecha arriba.
 
 Inicie sesión para ejecutar el proyecto TodoListClient.
 
-1. Presione F5 para abrir el proyecto TodoListClient. Se abre la página del proyecto.
+1. Presione F5 para iniciar los proyectos. Se abre la página del servicio, así como la aplicación de escritorio.
 
-1. En a parte superior derecha, seleccione **Iniciar sesión** e inicie sesión con las mismas credenciales del registro de la aplicación o con un usuario del mismo directorio.
+1. En la parte superior derecha de TodoListClient, seleccione **Iniciar sesión** e inicie sesión con las mismas credenciales del registro de la aplicación o con un usuario del mismo directorio.
 
    Si es la primera vez que inicia sesión, es posible que se le pida que dé su consentimiento a la API web TodoListService.
 
