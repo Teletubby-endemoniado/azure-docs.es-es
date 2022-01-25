@@ -7,19 +7,19 @@ author: mmacy
 manager: celested
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: quickstart
+ms.topic: portal
 ms.workload: identity
-ms.date: 10/22/2020
+ms.date: 11/22/2021
 ms.author: marsma
-ms.custom: aaddev, scenarios:getting-started, languages:js, devx-track-js
-ms.openlocfilehash: a593aef3ff99edb498e899b0d8db46c7b4636683
-ms.sourcegitcommit: 702df701fff4ec6cc39134aa607d023c766adec3
+ms.custom: aaddev, "scenarios:getting-started", "languages:js", devx-track-js, mode-api
+ms.openlocfilehash: 07b5610a057393cbad2c6123f04a3e9e37782d1c
+ms.sourcegitcommit: 34d047300d800cf6ff7d9dd3e573a0d785f61abc
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/03/2021
-ms.locfileid: "131427710"
+ms.lasthandoff: 01/12/2022
+ms.locfileid: "135929731"
 ---
-# <a name="quickstart-sign-in-users-and-get-an-access-token-in-a-node-web-app-using-the-auth-code-flow"></a>Inicio rápido: Inicio de sesión de los usuarios y obtención de un token de acceso en una aplicación web de Node mediante el flujo de código de autorización
+# <a name="quickstart-sign-in-users-and-get-an-access-token-in-a-nodejs-web-app-using-the-auth-code-flow"></a>Inicio rápido: Inicio de sesión de los usuarios y obtención de un token de acceso en una aplicación web de Node.js mediante el flujo de código de autorización
 
 En este inicio rápido, descargará y ejecutará un código de ejemplo que muestra de qué forma puede una aplicación web de Node.js realizar el inicio de sesión de los usuarios mediante el flujo de código de autorización. En el ejemplo de código se muestra cómo obtener un token de acceso para llamar a Microsoft Graph API.
 
@@ -33,91 +33,22 @@ En este inicio rápido se usa la biblioteca de autenticación de Microsoft para 
 * [Node.js](https://nodejs.org/en/download/)
 * [Visual Studio Code](https://code.visualstudio.com/download) u otro editor de código
 
-> [!div renderon="docs"]
-> ## <a name="register-and-download-your-quickstart-application"></a>Registro y descarga de la aplicación de inicio rápido
->
-> #### <a name="step-1-register-your-application"></a>Paso 1: Registrar su aplicación
->
-> 1. Inicie sesión en <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>.
-> 1. Si tiene acceso a varios inquilinos, use el filtro **Directorios y suscripciones** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para ir al inquilino en el que quiere registrar la aplicación.
-> 1. En **Administrar**, seleccione **Registros de aplicaciones** >  y, luego, **Nuevo registro**.
-> 1. Escriba el **nombre** de la aplicación. Los usuarios de la aplicación pueden ver este nombre, el cual se puede cambiar más tarde.
-> 1. En **Supported account types** (Tipos de cuenta compatibles), seleccione **Accounts in any organizational directory and personal Microsoft accounts** (Cuentas en cualquier directorio de organización y cuentas personales de Microsoft).
-> 1. Establezca el valor de **URI de redireccionamiento** en `http://localhost:3000/redirect`.
-> 1. Seleccione **Registrar**.
-> 1. En la página de **información general** de la aplicación, anote el valor del **Identificador de aplicación (cliente)** para su uso posterior.
-> 1. En **Administrar**, seleccione **Certificados y secretos** > **Secretos de los clientes** > **Nuevo secreto de cliente**.  Deje la descripción en blanco y la expiración predeterminada y, luego, seleccione **Agregar**.
-> 1. Anote el valor de **Secreto de cliente** para usarlo posteriormente.
+#### <a name="step-1-configure-the-application-in-azure-portal"></a>Paso 1: Configuración de la aplicación en Azure Portal
+Para que funcione el código de ejemplo de este inicio rápido, es preciso crear un secreto de cliente y agregar la siguiente dirección URL de respuesta: `http://localhost:3000/redirect`.
+> [!div class="nextstepaction"]
+> [Hacer este cambio por mí]()
 
-> [!div class="sxs-lookup" renderon="portal"]
-> #### <a name="step-1-configure-the-application-in-azure-portal"></a>Paso 1: Configuración de la aplicación en Azure Portal
-> Para que funcione el código de ejemplo de este inicio rápido, es preciso crear un secreto de cliente y agregar la siguiente dirección URL de respuesta: `http://localhost:3000/redirect`.
-> > [!div renderon="portal" id="makechanges" class="nextstepaction"]
-> > [Hacer este cambio por mí]()
->
-> > [!div id="appconfigured" class="alert alert-info"]
-> > ![Ya configurada](media/quickstart-v2-windows-desktop/green-check.png) La aplicación está configurada con estos atributos.
+> [!div class="alert alert-info"]
+> ![Ya configurada](media/quickstart-v2-windows-desktop/green-check.png) La aplicación está configurada con estos atributos.
 
 #### <a name="step-2-download-the-project"></a>Paso 2: Descarga del proyecto
 
-> [!div renderon="docs"]
-> Para ejecutar el proyecto con un servidor web con Node.js. [descargue los archivos principales del proyecto](https://github.com/Azure-Samples/ms-identity-node/archive/main.zip).
+Ejecute el proyecto con un servidor web mediante Node.js.
 
-> [!div renderon="portal" class="sxs-lookup"]
-> Ejecute el proyecto con un servidor web mediante Node.js.
-
-> [!div renderon="portal" class="sxs-lookup" id="autoupdate" class="nextstepaction"]
+> [!div class="nextstepaction"]
 > [Descargar el código de ejemplo](https://github.com/Azure-Samples/ms-identity-node/archive/main.zip)
 
-> [!div renderon="docs"]
-> #### <a name="step-3-configure-your-node-app"></a>Paso 3: Configuración de la aplicación de Node
->
-> Extraiga el proyecto, abra la carpeta *ms-identity-node-main* y, después, abra el archivo *index.js*.
->
-> Establezca el valor `clientID` con el identificador de aplicación (cliente) y, después, establezca el valor `clientSecret` con el secreto de cliente.
->
->```javascript
->const config = {
->    auth: {
->        clientId: "Enter_the_Application_Id_Here",
->        authority: "https://login.microsoftonline.com/common",
->        clientSecret: "Enter_the_Client_Secret_Here"
->    },
->    system: {
->        loggerOptions: {
->            loggerCallback(loglevel, message, containsPii) {
->                console.log(message);
->            },
->            piiLoggingEnabled: false,
->            logLevel: msal.LogLevel.Verbose,
->        }
->    }
->};
-> ```
-
-> [!div renderon="docs"]
->
-> Modifique los valores en la sección `config`:
->
-> - `Enter_the_Application_Id_Here` es el identificador (cliente) de la aplicación que ha registrado.
->
->    Para buscar el identificador de aplicación (cliente), vaya a la página **Información general** del registro de la aplicación en Azure Portal.
-> - `Enter_the_Client_Secret_Here` es el secreto de cliente de la aplicación que ha registrado.
->
->    Para recuperar o generar un secreto de cliente, en **Administrar**, seleccione **Certificados y secretos**.
->
-> El valor de `authority` predeterminado representa la nube de Azure principal (global):
->
-> ```javascript
-> authority: "https://login.microsoftonline.com/common",
-> ```
->
-> [!div class="sxs-lookup" renderon="portal"]
-> #### <a name="step-3-your-app-is-configured-and-ready-to-run"></a>Paso 3: La aplicación está configurada y lista para ejecutarse
->
-> [!div renderon="docs"]
->
-> #### <a name="step-4-run-the-project"></a>Paso 4: Ejecución del proyecto
+#### <a name="step-3-your-app-is-configured-and-ready-to-run"></a>Paso 3: La aplicación está configurada y lista para ejecutarse
 
 Ejecute el proyecto mediante Node.js.
 

@@ -1,23 +1,23 @@
 ---
 title: 'Inicio rápido: aplicación web ASP.NET Core que inicia la sesión de los usuarios y llama a Microsoft Graph | Azure'
 titleSuffix: Microsoft identity platform
-description: En este inicio rápido, obtendrá información sobre la forma en que una aplicación usa Microsoft.Identity.Web para implementar el inicio de sesión de Microsoft en una aplicación web ASP.NET Core mediante OpenID Connect y llama a Microsoft Graph
+description: En este inicio rápido, obtendrá información sobre la forma en que una aplicación usa Microsoft.Identity.Web para implementar el inicio de sesión de Microsoft en una aplicación web ASP.NET Core mediante OpenID Connect y llama a Microsoft Graph.
 services: active-directory
 author: jmprieur
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: quickstart
+ms.topic: portal
 ms.workload: identity
-ms.date: 05/17/2021
+ms.date: 11/22/2021
 ms.author: jmprieur
-ms.custom: devx-track-csharp, aaddev, scenarios:getting-started, languages:aspnet-core
-ms.openlocfilehash: 244736501dbd9a996ddb89159f0a7289244e51b1
-ms.sourcegitcommit: 702df701fff4ec6cc39134aa607d023c766adec3
+ms.custom: devx-track-csharp, aaddev, "scenarios:getting-started", "languages:aspnet-core", mode-other
+ms.openlocfilehash: 887a1e072f2ea9325fa1113446c57e5d68dbd691
+ms.sourcegitcommit: 34d047300d800cf6ff7d9dd3e573a0d785f61abc
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/03/2021
-ms.locfileid: "131466112"
+ms.lasthandoff: 01/12/2022
+ms.locfileid: "135935317"
 ---
 # <a name="quickstart-aspnet-core-web-app-that-signs-in-users-and-calls-microsoft-graph-on-their-behalf"></a>Inicio rápido: aplicación web ASP.NET Core que inicia la sesión de los usuarios y llama a Microsoft Graph en su nombre
 
@@ -25,94 +25,31 @@ En este inicio rápido, descargará y ejecutará un código de ejemplo que muest
 
 Para ilustrar este tema, consulte el apartado en el que se explica el [funcionamiento del ejemplo](#how-the-sample-works).
 
-> [!div renderon="docs"]
-> ## <a name="prerequisites"></a>Prerrequisitos
->
-> * [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) o [Visual Studio Code](https://code.visualstudio.com/)
-> * [SDK de .NET Core 3.1+](https://dotnet.microsoft.com/download)
->
->
-> ## <a name="step-1-register-your-application"></a>Paso 1: Registrar su aplicación
-> Para registrar la aplicación y agregar la información de registro de la aplicación a la solución de forma manual, siga estos pasos:
->
-> 1. Inicie sesión en <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>.
-> 1. Si tiene acceso a varios inquilinos, use el filtro **Directorios y suscripciones** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: del menú superior para ir al inquilino en el que quiere registrar la aplicación.
-> 1. Busque y seleccione **Azure Active Directory**.
-> 1. En **Administrar**, seleccione **Registros de aplicaciones** >  y, luego, **Nuevo registro**.
-> 1. Escriba el **Nombre** de la aplicación, por ejemplo `AspNetCoreWebAppCallsGraph-Quickstart`. Los usuarios de la aplicación pueden ver este nombre, el cual se puede cambiar más tarde.
-> 1. Escriba un **URI de redirección** de `https://localhost:44321/signin-oidc`.
-> 1. Seleccione **Registrar**.
-> 1. En **Administrar**, seleccione **Autenticación**.
-> 1. Especifique un valor para **Front-channel logout URL** (Dirección URL de cierre de sesión del canal frontal) de `https://localhost:44321/signout-oidc`.
-> 1. Seleccione **Guardar**.
-> 1. En **Administrar**, seleccione **Certificados y secretos** > **Secretos de los clientes** > **Nuevo secreto de cliente**.
-> 1. Escriba un valor en **Descripción**, por ejemplo`clientsecret1`.
-> 1. Seleccione **En 1 año** como expiración del secreto.
-> 1. Seleccione **Agregar** y registre inmediatamente el **valor** del secreto para usarlo en un paso posterior. Este valor de secreto *no se volverá a mostrar* y no se puede recuperar de ninguna otra manera. Regístrelo en una ubicación segura, tal como haría con cualquier contraseña.
+## <a name="step-1-configure-your-application-in-the-azure-portal"></a>Paso 1: Configuración de la aplicación en Azure Portal
 
-> [!div class="sxs-lookup" renderon="portal"]
-> ## <a name="step-1-configure-your-application-in-the-azure-portal"></a>Paso 1: Configuración de la aplicación en Azure Portal
->
-> Para que el código de ejemplo de este inicio rápido funcione, agregue un **URI de redirección**  de `https://localhost:44321/signin-oidc` y un valor para **Front-channel logout URL** (Dirección URL de cierre de sesión del canal frontal) de `https://localhost:44321/signout-oidc` en el registro de la aplicación.
-> > [!div renderon="portal" id="makechanges" class="nextstepaction"]
-> > [Hacer este cambio por mí]()
->
-> > [!div id="appconfigured" class="alert alert-info"]
-> > ![Ya configurada](media/quickstart-v2-aspnet-webapp/green-check.png) La aplicación está configurada con estos atributos.
+Para que el código de ejemplo de este inicio rápido funcione, agregue un **URI de redirección**  de `https://localhost:44321/signin-oidc` y un valor para **Front-channel logout URL** (Dirección URL de cierre de sesión del canal frontal) de `https://localhost:44321/signout-oidc` en el registro de la aplicación.
+> [!div class="nextstepaction"]
+> [Hacer este cambio por mí]()
+
+> [!div class="alert alert-info"]
+> ![Ya configurada](media/quickstart-v2-aspnet-webapp/green-check.png) La aplicación está configurada con estos atributos.
 
 ## <a name="step-2-download-the-aspnet-core-project"></a>Paso 2: Descarga del proyecto de ASP.NET Core
 
-> [!div renderon="docs"]
-> [Descargar la solución de ASP.NET Core](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/archive/aspnetcore3-1-callsgraph.zip)
+Ejecute el proyecto.
 
-> [!div renderon="portal" class="sxs-lookup"]
-> Ejecute el proyecto.
-
-> [!div renderon="portal" class="sxs-lookup" id="autoupdate" class="nextstepaction"]
+> [!div class="nextstepaction"]
 > [Descargar el código de ejemplo](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/archive/aspnetcore3-1-callsgraph.zip)
 
 [!INCLUDE [active-directory-develop-path-length-tip](../../../includes/active-directory-develop-path-length-tip.md)]
 
-> [!div class="sxs-lookup" renderon="portal"]
-> ## <a name="step-3-your-app-is-configured-and-ready-to-run"></a>Paso 3: La aplicación está configurada y lista para ejecutarse
->
-> Hemos configurado el proyecto con los valores de las propiedades de su aplicación y está preparado para ejecutarse.
-> [!div class="sxs-lookup" renderon="portal"]
-> > [!NOTE]
-> > `Enter_the_Supported_Account_Info_Here`
-> [!div renderon="docs"]
->
-> ## <a name="step-3-configure-your-aspnet-core-project"></a>Paso 3: Configuración del proyecto de ASP.NET Core
-> 1. Extraiga el archivo. zip en una carpeta local cerca de la raíz de la unidad. Por ejemplo, en *C:\Azure-Samples*.
-> 1. Abra la solución en Visual Studio 2019.
-> 1. Abra el archivo *appsettings.json* y modifique lo siguiente:
->
->    ```json
->    "ClientId": "Enter_the_Application_Id_here",
->    "TenantId": "common",
->    "clientSecret": "Enter_the_Client_Secret_Here"
->    ```
->
->    - Reemplace `Enter_the_Application_Id_here` por el **Id. de aplicación (cliente)** de la aplicación que ha registrado en Azure Portal. Puede encontrar el **Identificador de aplicación (cliente)** en la página **Información general** de la aplicación.
->    - Reemplace `common` por una de las opciones siguientes:
->       - Si la aplicación admite **Solo las cuentas de este directorio organizativo**, reemplace este valor por el **Id. de directorio (inquilino)** (un GUID) o por el **Nombre del inquilino** (por ejemplo, `contoso.onmicrosoft.com`). Puede encontrar el **Id. de directorio (inquilino)** en la página **Introducción** de la aplicación.
->       - Si la aplicación admite **Cuentas en cualquier directorio organizativo**, reemplace este valor por `organizations`
->       - Si la aplicación admite **Todos los usuarios de cuentas Microsoft**, deje este valor establecido en `common`.
->    - Reemplace `Enter_the_Client_Secret_Here` por el **secreto de cliente** que creó y registró en un paso anterior.
->
-> Para esta guía de inicio rápido, no cambie ningún otro valor del archivo *appsettings.json*.
->
-> ## <a name="step-4-build-and-run-the-application"></a>Paso 4: Compilación y ejecución de la aplicación
->
-> Para compilar y ejecutar la aplicación en Visual Studio, seleccione el menú **Depurar** > **Iniciar depuración** o presione la tecla `F5`.
->
-> Se le pedirán las credenciales y, a continuación, se le pedirá que dé su consentimiento a los permisos que requiere la aplicación. Seleccione **Aceptar** en la solicitud de consentimiento.
->
-> :::image type="content" source="media/quickstart-v2-aspnet-core-webapp-calls-graph/webapp-01-consent.png" alt-text="Cuadro de diálogo de consentimiento que muestra los permisos que solicita la aplicación al usuario >":::
->
-> Tras el consentimiento a los permisos solicitados, la aplicación muestra que ha iniciado sesión correctamente con sus credenciales de Azure Active Directory y verá su dirección de correo electrónico en la sección "Api result" (Resultado de la API) de la página. La extracción se realizó mediante Microsoft Graph.
->
-> :::image type="content" source="media/quickstart-v2-aspnet-core-webapp-calls-graph/webapp-02-signed-in.png" alt-text="Explorador web que muestra la aplicación web en ejecución y el usuario con la sesión iniciada":::
+
+## <a name="step-3-your-app-is-configured-and-ready-to-run"></a>Paso 3: La aplicación está configurada y lista para ejecutarse
+
+Hemos configurado el proyecto con los valores de las propiedades de su aplicación y está preparado para ejecutarse.
+
+> [!NOTE]
+> `Enter_the_Supported_Account_Info_Here`
 
 ## <a name="about-the-code"></a>Sobre el código
 
@@ -127,11 +64,12 @@ En esta sección se proporciona información general sobre el código necesario 
 El middleware *Microsoft.AspNetCore.Authentication* usa una clase `Startup` que se ejecuta cuando se inicializa el proceso de hospedaje:
 
 ```csharp
-  // Get the scopes from the configuration (appsettings.json)
-  var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 
   public void ConfigureServices(IServiceCollection services)
-  {
+  {  
+    // Get the scopes from the configuration (appsettings.json)
+    var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
+  
       // Add sign-in with Microsoft
       services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
         .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
