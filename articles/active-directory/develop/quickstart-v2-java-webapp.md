@@ -10,14 +10,15 @@ ms.subservice: develop
 ms.topic: portal
 ms.workload: identity
 ms.date: 11/22/2021
+ROBOTS: NOINDEX
 ms.author: marsma
 ms.custom: aaddev, "scenarios:getting-started", "languages:Java", devx-track-java, mode-api
-ms.openlocfilehash: c90516fb5012774f11463f06ab26f74b0dc5c06c
-ms.sourcegitcommit: 34d047300d800cf6ff7d9dd3e573a0d785f61abc
+ms.openlocfilehash: fa85851bba852448550aa3a4c392a329af012eaf
+ms.sourcegitcommit: 3f20f370425cb7d51a35d0bba4733876170a7795
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/12/2022
-ms.locfileid: "135921467"
+ms.lasthandoff: 01/27/2022
+ms.locfileid: "137804900"
 ---
 # <a name="quickstart-add-sign-in-with-microsoft-to-a-java-web-app"></a>Inicio rápido: Adición de inicio de sesión con Microsoft a una aplicación web de Java
 
