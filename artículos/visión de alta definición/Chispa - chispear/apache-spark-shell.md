@@ -1,5 +1,6 @@
----
-title: Uso de un Shell de Spark interactivo en Azure HDInsight
+---librar = ENTERO
+Registro ID del check-in a editar (OBLIGATORIO)
+title: Uso de un Shell de Spark interactivo en Azure HDInsightct
 description: Un Shell de Spark interactivo proporciona un proceso de impresión de lectura-ejecución para ejecutar comandos de Spark puntuales y ver los resultados.
 ms.service: hdinsight
 ms.topic: how-to
